@@ -1,0 +1,235 @@
+/* For all other devices */
+@media (min-width: 1024px) and (min-height: 600px) {
+    .frame {
+        height: 17vh;
+    }
+
+    .screen .form-control {
+        width: 20%;
+        height: 45%;
+        left: 56%;
+        font-size: 15px;
+    }
+
+    .screen .search-img {
+        width: 5.5vw;
+        height: 58%;
+        top: 21%;
+        left: 76.5%;
+    }
+
+    .screen .profile-img {
+        width: 4vw;
+        height: 50%;
+        top: 27%;
+        left: 84%;
+    }
+
+    .screen .shop-cart-img {
+        top: 30%;
+        height: 45%;
+        left: 91%;
+    }
+}
+
+/* For tablet */
+@media (min-width: 768px) and (max-width: 1024px) and (max-height: 1600px) {
+    .frame {
+        height: 10vh;
+    }
+
+    .screen .form-control {
+        width: 15%;
+        height: 42%;
+        left: 62%;
+        font-size: 15px;
+    }
+
+    .screen .search-img {
+        width: 5.7vw;
+        height: 35%;
+        top: 34%;
+        left: 77.5%;
+    }
+
+    .screen .profile-img {
+        width: 4.5vw;
+        height: 35%;
+        top: 34%;
+        left: 85.5%;
+    }
+
+    .screen .shop-cart-img {
+        top: 37.2%;
+        height: 30%;
+        left: 93%;
+    }
+}
+
+/* For mobile phone */
+@media (min-width: 344px) and (max-width: 768px) and (max-height: 1200px) {
+    .frame {
+        height: 6%;
+    }
+
+    .screen .form-control {
+        width: 14%;
+        height: 40%;
+        left: 61%;
+        font-size: 8px;
+    }
+
+    .screen .search-img {
+        width: 4.7vw;
+        height: 35%;
+        top: 32%;
+        left: 76.5%;
+    }
+
+    .screen .profile-img {
+        width: 4.5vw;
+        height: 30%;
+        top: 34%;
+        left: 84%;
+    }
+
+    .screen .shop-cart-img {
+        top: 38%;
+        height: 25%;
+        left: 91%;
+    }
+}
+
+@media (max-height: 600px) {
+    .frame {
+        height: 16vh;
+    }
+
+    .screen .form-control {
+        width: 14%;
+        height: 40%;
+        left: 61%;
+        font-size: 8px;
+    }
+
+    .screen .search-img {
+        width: 4.7vw;
+        height: 38%;
+        top: 35%;
+        left: 76.5%;
+    }
+
+    .screen .profile-img {
+        width: 4.5vw;
+        height: 40%;
+        top: 34%;
+        left: 84%;
+    }
+
+    .screen .shop-cart-img {
+        top: 35%;
+        height: 40%;
+        left: 91%;
+    }
+}
+
+.screen a {
+    color: black;
+    text-decoration: none;
+}
+
+.screen .frame-text {
+    top: 38%;
+}
+
+.screen .frame {
+    position: fixed;
+    width: 100vw;
+    /* height: 16vw; */
+    text-align: center;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #fffcf3;
+    box-shadow: var(--dth);
+}
+
+.screen .main {
+    position: absolute;
+    margin-left: 3%;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: clamp(10px, 3vw, 30px);
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.screen .menu {
+    position: absolute;
+    left: 16.5%;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    font-size: clamp(10px, 3vw, 30px);
+    line-height: normal;
+    white-space: nowrap;
+    color: #000000;
+    letter-spacing: 0;
+}
+
+.screen .reviews {
+    position: absolute;
+    left: 26.5%;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    font-size: clamp(10px, 3vw, 30px);
+    line-height: normal;
+    white-space: nowrap;
+    color: #000000;
+    letter-spacing: 0;
+}
+
+.screen .logo-img {
+    position: absolute;
+    width: 7.9;
+    height: 79%;
+    top: 11%;
+    left: clamp(43%, 44vw, 50%);
+}
+
+.screen .form-control {
+    /* Виправити це за розміром і відступом зліва*/
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    border: none;
+    position: absolute;
+    /* font-size: 8px; */
+    /* width: 20%;
+    height: 45%; */
+    top: 30%;
+    /* left: 56%; */
+}
+
+/* .screen .add-img {
+    width: 4.5vw;
+    height: 40;
+    top: 33%;
+} */
+
+.screen .search-img {
+    position: absolute;
+    /* left: 76.5%; */
+}
+
+.screen .profile-img {
+    position: absolute;
+    /* left: 84%; */
+}
+
+.screen .shop-cart-img {
+    position: absolute;
+    width: 4.5%;
+    /* top: 32%; */
+    /* left: 91%; */
+}
