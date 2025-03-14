@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import * as path from 'path';
 import bodyParser from "body-parser";
 
+import * as router from './controllers.js'
+
 const app: Express = express();
 
 const dirname: string = path.resolve();
@@ -37,6 +39,8 @@ app.get('/shop-cart', (req: Request, res: Response) => {
 app.get('/profile', (req: Request, res: Response) => {
     res.render(path.join(dirname, '/views/profile-page.ejs'))
 });
+
+app.route('/api/cake').get(router.requestCakes);
 
 app.listen(PORT, () => {
     console.log(`Server starts on port ${PORT}`);

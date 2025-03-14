@@ -1,23 +1,27 @@
-import { getAllCakes, getAllDrinks, getAllPastries } from "./scripts.js";
-import { Data } from "./pattern/pattern.js";
+import express, { Request, Response } from 'express';
+import { getAllCakes, getAllDrinks, getAllPastries, searchProducts } from "./scripts.js";
+import { Product } from "./pattern/pattern.js";
 
 /**
  * Get books by parameters after preprocessing them
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestCakes(req: Request): Promise<Data> {
+export async function requestCakes(req: Request, res: Response) {
     let result;
-    let data: Data = { id: 0, name: '', price: 0, availability: 0 };
-
     result = await getAllCakes();
 
-    data.id = result.id;
-    data.name = result.name;
-    data.price = result.price;
-    data.availability = result.avalability;
+    let products: Product[] = result.map((data: any) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    })
 
-    return data;
+    res.send(products);
 }
 
 /**
@@ -25,18 +29,21 @@ async function requestCakes(req: Request): Promise<Data> {
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestDrinks(req: Request): Promise<Data> {
+async function requestDrinks(req: Request, res: Response) {
     let result;
-    let data: Data = { id: 0, name: '', price: 0, availability: 0 };
-
     result = await getAllDrinks();
 
-    data.id = result.id;
-    data.name = result.name;
-    data.price = result.price;
-    data.availability = result.avalability;
+    let products: Product[] = result.map((data: any) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    })
 
-    return data;
+    res.send(products);
 }
 
 /**
@@ -44,16 +51,35 @@ async function requestDrinks(req: Request): Promise<Data> {
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestPastries(req: Request): Promise<Data> {
+async function requestPastries(req: Request, res: Response) {
     let result;
-    let data: Data = { id: 0, name: '', price: 0, availability: 0 };
-
     result = await getAllPastries();
 
-    data.id = result.id;
-    data.name = result.name;
-    data.price = result.price;
-    data.availability = result.avalability;
+    let products: Product[] = result.map((data: any) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    })
 
-    return data;
+    res.send(products);
+}
+
+async function requestSearchProducts(req: Request, res: Response) {
+    let result = await searchProducts(req.body);
+
+    let products: Product[] = result.map((data: any) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    })
+
+    res.send(products);
 }
