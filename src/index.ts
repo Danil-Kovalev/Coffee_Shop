@@ -40,7 +40,9 @@ app.get('/profile', (req: Request, res: Response) => {
     res.render(path.join(dirname, '/views/profile-page.ejs'))
 });
 
-app.route('/api/cake').get(router.requestCakes);
+app.route('/api/cakes').get(router.requestCakes);
+app.route('/api/drinks').get(router.requestDrinks);
+app.route('/api/buns').get(router.requestPastries);
 
 app.listen(PORT, () => {
     console.log(`Server starts on port ${PORT}`);

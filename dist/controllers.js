@@ -1,46 +1,71 @@
-import { getAllCakes, getAllDrinks, getAllPastries } from "./scripts.js";
+import { getAllCakes, getAllDrinks, getAllPastries, searchProducts } from "./scripts.js";
 /**
  * Get books by parameters after preprocessing them
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestCakes(req) {
+export async function requestCakes(req, res) {
     let result;
-    let data = { id: 0, name: '', price: 0, availability: 0 };
     result = await getAllCakes();
-    data.id = result.id;
-    data.name = result.name;
-    data.price = result.price;
-    data.availability = result.avalability;
-    return data;
+    let products = result.map((data) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    });
+    res.send(products);
 }
 /**
  * Get books by parameters after preprocessing them
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestDrinks(req) {
+export async function requestDrinks(req, res) {
     let result;
-    let data = { id: 0, name: '', price: 0, availability: 0 };
     result = await getAllDrinks();
-    data.id = result.id;
-    data.name = result.name;
-    data.price = result.price;
-    data.availability = result.avalability;
-    return data;
+    let products = result.map((data) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    });
+    res.send(products);
 }
 /**
  * Get books by parameters after preprocessing them
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestPastries(req) {
+export async function requestPastries(req, res) {
     let result;
-    let data = { id: 0, name: '', price: 0, availability: 0 };
     result = await getAllPastries();
-    data.id = result.id;
-    data.name = result.name;
-    data.price = result.price;
-    data.availability = result.avalability;
-    return data;
+    let products = result.map((data) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    });
+    res.send(products);
+}
+export async function requestSearchProducts(req, res) {
+    let result = await searchProducts(req.body);
+    let products = result.map((data) => {
+        return {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            availability: data.availability,
+            type: data.type
+        };
+    });
+    res.send(products);
 }

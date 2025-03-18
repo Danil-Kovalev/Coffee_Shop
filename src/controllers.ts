@@ -29,7 +29,7 @@ export async function requestCakes(req: Request, res: Response) {
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestDrinks(req: Request, res: Response) {
+export async function requestDrinks(req: Request, res: Response) {
     let result;
     result = await getAllDrinks();
 
@@ -51,7 +51,7 @@ async function requestDrinks(req: Request, res: Response) {
  * @param req parameters from client
  * @returns the result of successful execution
  */
-async function requestPastries(req: Request, res: Response) {
+export async function requestPastries(req: Request, res: Response) {
     let result;
     result = await getAllPastries();
 
@@ -68,7 +68,7 @@ async function requestPastries(req: Request, res: Response) {
     res.send(products);
 }
 
-async function requestSearchProducts(req: Request, res: Response) {
+export async function requestSearchProducts(req: Request, res: Response) {
     let result = await searchProducts(req.body);
 
     let products: Product[] = result.map((data: any) => {
