@@ -1,16 +1,16 @@
-export var view = {
-    addBookItem: function (book) {
+export let view = {
+    addProductItem: function (book) {
         return $('#pattern').html()
             .replace(/{id}/g, book.id)
             .replace(/{title}/g, book.title)
             .replace(/{author}/g, book.author);
     },
-    addBooksItems: function (books, doClean) {
+    addProductItems: function (books, doClean) {
         var content = $('#content');
         var contentHTML = ((doClean) ? '' : content.html());
 
         for (var i in books) {
-            contentHTML += view.addBookItem(books[i]);
+            contentHTML += view.addProductItem(books[i]);
         }
 
         content.html(contentHTML);
@@ -70,5 +70,34 @@ export var view = {
         }
         content.html(contentHTML);
         content.show('fast');
+    },
+    showError: function(text) {
+        Swal.fire('Ооопс!', text, 'error');
     }
+};
+
+export function doAjaxQuery(method, url, data, callback) {
+    $.ajax({
+        type: method,
+        url: url,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: ((method == 'POST') ? JSON.stringify(data) : data),
+        success: function(res) {
+            if (!res.success) {
+                view.showError(res.msg);
+                return;
+            }
+            callback(res);
+        },
+        error: function(jqXHR, textStatus) {
+            view.showError('Помилка ' + textStatus);
+        }
+    });
+}
+
+export let global = {
+    items_limit_on_page_load: 6,
+    number_of_items_onscroll: 3,
+    filter: 'menu-cakes'
 };

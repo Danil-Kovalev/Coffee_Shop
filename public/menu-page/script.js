@@ -1,7 +1,7 @@
 import { doAjaxQuery } from '../scripts/common.js'
 import { view } from '../scripts/common.js';
 import { global } from '../scripts/common.js';
-import { setSidebarActiveButton } from './sidebar.js';
+// import { setSidebarActiveButton } from './sidebar.js';
 
 var drawItems;
 export var isScrollRunning = false;
@@ -10,22 +10,27 @@ let numberOfBooks = 0;
 $(document).ready(function () {
 
     (function () {
-        setSidebarActiveButton(null, data.filter); //?
-        doAjaxQuery('GET', '/api/v1/books', data, function (res) {
-            view.addBooksItems(res.data.books, true);
-            drawItems = initDrawItems(res.data.total.amount);
+        var data = {
+            filter: getParameterByName('filter') || global.filter,
+            offset: getParameterByName('offset'),
+            limit: getParameterByName('count') || global.items_limit_on_page_load
+        };
+        // setSidebarActiveButton(null, data.filter); ??
+        doAjaxQuery('GET', '/api/products', data, function (res) {
+            view.addProductItems(res.data, true);
+            drawItems = initDrawItems(res.total);
             // numberOfBooks += res.data.books.length;
             // checkCountBooks(numberOfBooks, res.data.total.amount)
         });
     }());
 
-    $('#nextBtn').on('click', function () {
-        drawItems();
-    })
+    // $('#nextBtn').on('click', function () {
+    //     drawItems();
+    // })
 
-    $('#prevBtn').on('click', function () {
-        backDrawItems();
-    })
+    // $('#prevBtn').on('click', function () {
+    //     backDrawItems();
+    // })
 });
 
 export function getParameterByName(name, url) {
@@ -41,35 +46,35 @@ export function getParameterByName(name, url) {
 var initDrawItems = function (maxItems) {
     var maxNumOfItems = maxItems,
         limit = global.number_of_items_onscroll
-        // offset = parseInt(getParameterByName('count')) || global.items_limit_on_page_load;
+        offset = parseInt(getParameterByName('count')) || global.items_limit_on_page_load;
 
     return function () {
-        // offset = parseInt(getParameterByName('count')) || global.items_limit_on_page_load;
+        offset = parseInt(getParameterByName('count')) || global.items_limit_on_page_load;
         if (offset < maxNumOfItems) {
             var data = {
-                'filter': getParameterByName('filter') || "menu-desserts",
-                // 'offset': offset,
+                'filter': getParameterByName('filter') || global.filter,
+                'offset': offset,
                 'limit': limit
             };
-            doAjaxQuery('GET', '/api/v1/books', data,
+            doAjaxQuery('GET', '/api/products', data,
                 function (res) {
                     isScrollRunning = false;
-                    view.addBooksItems(res.data.books, true);
-                    changeHistoryStateWithParams("replace", res.data.filter);
+                    view.addProductItems(res.data, false);
+                    changeHistoryStateWithParams("replace", res.data.type);
                     // numberOfBooks += res.data.books.length;
                     // checkCountBooks(numberOfBooks, res.data.total.amount)
                 }
             );
-            // offset += limit;
+            offset += limit;
         }
     }
 };
 
 export function loadIndexPage(reqData) {
-    doAjaxQuery('GET', '/api/v1/books', reqData, function (res) {
-        view.addBooksItems(res.data.books, true);
-        changeHistoryStateWithParams('push', res.data.filter);
-        drawItems = initDrawItems(res.data.total.amount);
+    doAjaxQuery('GET', '/api/products', reqData, function (res) {
+        view.addProductItems(res.data, true);
+        changeHistoryStateWithParams('push', res.data.type);
+        drawItems = initDrawItems(res.total);
         
         // numberOfBooks = 0;
         // numberOfBooks += res.data.books.length;
@@ -82,9 +87,9 @@ function changeHistoryStateWithParams(action, filter) {
         return;
     }
 
-    // offset = parseInt(offset);
-    // var count = offset ? global.number_of_items_onscroll : global.items_limit_on_page_load;
-    var queryString = '?filter=' + filter;
+    offset = parseInt(offset);
+    let count = offset ? global.number_of_items_onscroll : global.items_limit_on_page_load;
+    let queryString = '?filter=' + filter + '&count=' + (offset + count);
     if (action === 'push') {
         window.history.pushState('', queryString);
     } else {

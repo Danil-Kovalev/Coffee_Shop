@@ -13,13 +13,7 @@ app.set('views', path.join(dirname, '/views'));
 app.get('/', (req, res) => {
     res.render(path.join(dirname, '/views/main-page.ejs'));
 });
-app.get('/menu-desserts', (req, res) => {
-    res.render(path.join(dirname, '/views/menu-page.ejs'));
-});
-app.get('/menu-buns', (req, res) => {
-    res.render(path.join(dirname, '/views/menu-page.ejs'));
-});
-app.get('/menu-drinks', (req, res) => {
+app.get('/menu', (req, res) => {
     res.render(path.join(dirname, '/views/menu-page.ejs'));
 });
 app.get('/shop-cart', (req, res) => {
@@ -28,9 +22,7 @@ app.get('/shop-cart', (req, res) => {
 app.get('/profile', (req, res) => {
     res.render(path.join(dirname, '/views/profile-page.ejs'));
 });
-app.route('/api/cakes').get(router.requestCakes);
-app.route('/api/drinks').get(router.requestDrinks);
-app.route('/api/buns').get(router.requestPastries);
+app.route('/api/products').get(router.requestProducts);
 app.listen(PORT, () => {
     console.log(`Server starts on port ${PORT}`);
 });
